@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2025</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff3a96, #f76f86, #fa1427, #f18181);
+            background-size: 400% 400%;
+            color: white;
+            text-align: center;
+            padding: 50px;
+            animation: gradientAnimation 10s ease infinite;
+            overflow: hidden; /* Disable scrolling initially */
+            height: 200vh; /* Extend the height for scrolling */
+        }
+        h1 {
+            font-size: 3em;
+            animation: glow 1s infinite alternate;
+        }
+        p {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #ff5733;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+        button:hover {
+            background-color: #c70039;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #3700ff; }
+            to { text-shadow: 0 0 20px #07f81b; }
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .emoji {
+            position: absolute;
+            top: -50px;
+            animation: fall linear infinite;
+            pointer-events: none;
+        }
+        .scroll-text {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+            font-size: 5em; /* Increased font size */
+            margin-top: 20px;
+            animation: moveText 10s linear infinite, vibrate 0.1s linear infinite;
+            display: none; /* Initially hidden */
+        }
+        @keyframes moveText {
+            0% { left: 100vw; }
+            100% { left: -100%; } /* Adjusted to move fully past the screen */
+        }
+        @keyframes vibrate {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(5px); }
+        }
+        .delayed-text {
+            font-size: 2em;
+            margin-top: 20px;
+            opacity: 0; /* Initially hidden */
+            transition: opacity 1s; /* Fade in effect */
+        }
+        .delayed-text.visible {
+            opacity: 1; /* Make visible when class added */
+        }
+        .section {
+            height: 100vh; /* Create sections for scrolling */
+            padding: 50px;
+        }
+        /* New scroll prompt styles */
+        .scroll-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            color: white;
+            display: none; /* Initially hidden */
+            align-items: center;
+            opacity: 1;
+            transition: opacity 1s ease-in-out; /* Add fade-out effect */
+        }
+        .scroll-arrow {
+            margin-left: 10px;
+            font-size: 2em;
+            animation: bounce 1s infinite; /* Arrow bounce animation */
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="section" id="first-screen">
+        <h1>Happy New Year 2025!</h1>
+        <p>To the most amazing person in my life, MUNNI!!!</p>
+        <button onclick="startEmojiShower()">Click eh😭</button>
+        <p id="message" style="display:none;">Every year is special with you by my side. Let’s make 2025 unforgettable!</p>
+    </div>
+
+    <div class="section" id="second-screen">
+        <div id="scroll-text" class="scroll-text">AHHHHHHHHHHHHHHHHHHHHHH😭😭😭</div>
+        <div id="delayed-text" class="delayed-text">TEXT</div>
+    </div>
+
+    <!-- Scroll prompt -->
+    <div id="scroll-prompt" class="scroll-prompt">
+        <span>Scroll if you a CUTIE</span>
+        <span class="scroll-arrow">↓</span>
+    </div>
+
+    <script>
+        // Reveal the message and enable scrolling
+        function startEmojiShower() {
+            revealMessage();
+            enableScroll();
+            showScrollingText(); // Show scrolling text after button click
+            showScrollPrompt(); // Show scroll prompt text and arrow after button click
+            for (let i = 0; i < 50; i++) {
+                createFallingEmoji();
+            }
+            hideScrollPrompt(); // Fade out scroll prompt after 5 seconds
+        }
+
+        function revealMessage() {
+            document.getElementById('message').style.display = 'block';
+        }
+
+        function enableScroll() {
+            document.body.style.overflow = 'auto'; // Enable scrolling
+        }
+
+        function createFallingEmoji() {
+            const emoji = document.createElement('div');
+            emoji.textContent = '💖';
+            emoji.className = 'emoji';
+            emoji.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+            emoji.style.fontSize = Math.random() * 30 + 20 + 'px'; // Random size
+            emoji.style.animationDuration = Math.random() * 2 + 3 + 's'; // Random fall speed
+            document.body.appendChild(emoji);
+
+            // Remove emoji after animation ends
+            emoji.addEventListener('animationend', () => {
+                emoji.remove();
+            });
+        }
+
+        function showScrollingText() {
+            const scrollText = document.getElementById('scroll-text');
+            scrollText.style.display = 'block'; // Show scrolling text
+        }
+
+        function showScrollPrompt() {
+            const scrollPrompt = document.getElementById('scroll-prompt');
+            scrollPrompt.style.display = 'flex'; // Show scroll prompt
+        }
+
+        function hideScrollPrompt() {
+            const scrollPrompt = document.getElementById('scroll-prompt');
+            setTimeout(() => {
+                scrollPrompt.style.opacity = 0; // Fade out the scroll prompt
+            }, 5000); // Wait for 5 seconds before fading out
+        }
+
+        // Detect scroll to reveal delayed text
+        window.addEventListener('scroll', () => {
+            const delayedText = document.getElementById('delayed-text');
+            const windowHeight = window.innerHeight;
+
+            // Check if user has scrolled past the first screen
+            if (window.scrollY > windowHeight) {
+                setTimeout(() => {
+                    delayedText.classList.add('visible');
+                }, 1000); // Delay of 1 second
+            }
+        });
+    </script>
+</body>
+</html>
