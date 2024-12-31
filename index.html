@@ -114,9 +114,43 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(10px); }
         }
+
+        /* Slideshow styles */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 50px;
+        }
+        .slideshow-wrapper {
+            display: flex;
+            animation: scrollSlides 20s linear infinite;
+        }
+        .slide {
+            position: relative;
+            flex-shrink: 0;
+            width: 100vw;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 2em;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        @keyframes scrollSlides {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-600%); }
+        }
     </style>
 </head>
 <body>
+
+    <!-- First screen content -->
     <div class="section" id="first-screen">
         <h1>Happy New Year 2025!</h1>
         <p>To the most amazing person in my life, MUNNI!!!</p>
@@ -124,9 +158,34 @@
         <p id="message" style="display:none;">Every year is special with you by my side. Let’s make 2025 unforgettable!</p>
     </div>
 
+    <!-- Second screen content -->
     <div class="section" id="second-screen">
         <div id="scroll-text" class="scroll-text">AHHHHHHHHHHHHHHHHHHHHHH😭😭😭</div>
         <div id="delayed-text" class="delayed-text">TEXT</div>
+    </div>
+
+    <!-- Slideshow Section -->
+    <div class="slideshow-container">
+        <div class="slideshow-wrapper">
+            <div class="slide" style="background-image: url('image1.jpg');">
+                <div class="slide-text">Text for Image 1</div>
+            </div>
+            <div class="slide" style="background-image: url('image2.jpg');">
+                <div class="slide-text">Text for Image 2</div>
+            </div>
+            <div class="slide" style="background-image: url('image3.jpg');">
+                <div class="slide-text">Text for Image 3</div>
+            </div>
+            <div class="slide" style="background-image: url('image4.jpg');">
+                <div class="slide-text">Text for Image 4</div>
+            </div>
+            <div class="slide" style="background-image: url('image5.jpg');">
+                <div class="slide-text">Text for Image 5</div>
+            </div>
+            <div class="slide" style="background-image: url('image6.jpg');">
+                <div class="slide-text">Text for Image 6</div>
+            </div>
+        </div>
     </div>
 
     <!-- Scroll prompt -->
@@ -185,21 +244,28 @@
             const scrollPrompt = document.getElementById('scroll-prompt');
             setTimeout(() => {
                 scrollPrompt.style.opacity = 0; // Fade out the scroll prompt
-            }, 5000); // Wait for 5 seconds before fading out
+            }, 5000);
         }
 
-        // Detect scroll to reveal delayed text
-        window.addEventListener('scroll', () => {
+        // Adding delayed text appearance with smooth fade-in effect
+        window.addEventListener('scroll', function() {
             const delayedText = document.getElementById('delayed-text');
-            const windowHeight = window.innerHeight;
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const textPosition = delayedText.offsetTop;
 
-            // Check if user has scrolled past the first screen
-            if (window.scrollY > windowHeight) {
-                setTimeout(() => {
-                    delayedText.classList.add('visible');
-                }, 1000); // Delay of 1 second
+            if (scrollPosition > textPosition) {
+                delayedText.classList.add('visible');
             }
         });
+
+        // Add animation on page load
+        window.onload = () => {
+            setTimeout(() => {
+                const textElement = document.getElementById("scroll-text");
+                textElement.style.animationPlayState = "running";
+            }, 1000); // Start after a short delay for effect
+        };
     </script>
+
 </body>
 </html>
